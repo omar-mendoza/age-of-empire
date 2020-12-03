@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="jumbotron mt-3">
+        <h2 class="text-center">Civilizaciones Age of Empire II</h2>
+    </div>
+
+    <div [hidden]="showDetalle == true">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Expansion</th>
+                    <th>Army Type</th>
+                    <th>Team Bonus</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let civ of dataPag">
+                    <td (click)="showCivilization(civ.id)" style="color: blue; font-weight: bold;"> {{civ.id}} </td>
+                    <td> {{civ.name}} </td>
+                    <td> {{civ.expansion}} </td>
+                    <td> {{civ.army_type}} </td>
+                    <td> {{civ.team_bonus}} </td>
+                </tr>
+            </tbody>
+        </table>
+        Total: {{totalCivs}} <br>
+        <button class="btn btn-primary" (click)="anterior()" [disabled]="pagina == 0"> * Anterior </button>
+        <button class="btn btn-primary" (click)="siguiente()" [disabled]="pagina == 3">Siguiente *</button>
+
+    </div>
+
+    <div [hidden]="showDetalle == false">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Expansion</th>
+                    <th>Army Type</th>
+                    <th>Team Bonus</th>
+                    <th>Civ Bonus</th>
+                    <th>Unique Unit</th>
+                    <th>Unique Tech</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of civ">
+                    <td style="font-weight: bold;"> {{c.id}} </td>
+                    <td> {{c.name}} </td>
+                    <td> {{c.expansion}} </td>
+                    <td> {{c.army_type}} </td>
+                    <td> {{c.team_bonus}} </td>
+                    <td>
+                        <p *ngFor="let d of c.civilization_bonus"> 
+                            * {{d}}.
+                        </p>
+                    </td>
+                    <td>
+                        {{c.unique_unit[0]}}
+                    </td>
+                    <td>
+                        {{c.unique_tech[0]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" (click)="regresar()"> Regresar </button>
+    </div>
+</div>
