@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { GetDataService } from 'src/app/service/get-data.service';
 
@@ -16,6 +17,8 @@ export class HomeComponent implements OnInit {
   pagina = 0;
   showDetalle = false;
 
+  url = 'https://age-of-empires-2-api.herokuapp.com/api/v1/civilizations';
+
   constructor(private dataService: GetDataService) { }
 
   ngOnInit(): void {
@@ -23,8 +26,13 @@ export class HomeComponent implements OnInit {
   }
 
   async loadData() {
-    this.data = await this.dataService.getData();
-    this.paginationData();
+    // this.data = await this.dataService.getData();
+    
+    this.dataService.getData().subscribe(res => {
+      this.data = res['civilizations'];
+      this.paginationData();
+    });
+
   }
 
   async showCivilization(id: number) {

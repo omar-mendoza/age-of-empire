@@ -10,13 +10,17 @@ export class GetDataService {
 
   constructor(private http: HttpClient) { }
 
-  async getData() {
+  // async getData() {
 
-    let data = [];
-    await this.http.get<[]>(this.url).toPromise().then((res) => {
-      data = res['civilizations'];
-    }).catch(err => console.log('Error al obtener los datos'))
+  //   let data = [];
+  //   await this.http.get<[]>(this.url).toPromise().then((res) => {
+  //     data = res['civilizations'];
+  //   }).catch(err => console.log('Error al obtener los datos'))
 
-    return data;
+  //   return data;
+  // }
+
+  getData() {
+    return this.http.get<[]>(this.url);
   }
 }
